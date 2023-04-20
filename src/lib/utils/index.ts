@@ -1,3 +1,3 @@
 export const allExpressionsTrue = (expressions: boolean[]) => {
-    return expressions.every(expression => expression === true);
+	return expressions.every(expression => expression === true)
 }

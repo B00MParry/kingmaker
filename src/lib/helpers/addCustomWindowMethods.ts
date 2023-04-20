@@ -1,4 +1,4 @@
-import { CampaignType, addCampaigns } from "./addCampaigns";
+import { CampaignType, addCampaigns } from './addCampaigns'
 
 declare global {
     interface Window {
@@ -7,5 +7,5 @@ declare global {
 }
 
 export const addCustomWindowMethods = () => {
-    window.addCampaigns = addCampaigns
+	window.addCampaigns = addCampaigns
 }
