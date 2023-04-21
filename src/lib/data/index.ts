@@ -8,5 +8,15 @@ export default [
 	{ 'id': 7, 'name': 'Blogtag', 'startDate': '6/27/2017', 'endDate': '1/15/2018', 'Budget': 109078 },
 	{ 'id': 8, 'name': 'Rhyzio', 'startDate': '10/13/2017', 'endDate': '1/25/2018', 'Budget': 272552 },
 	{ 'id': 9, 'name': 'Zoomcast', 'startDate': '9/6/2017', 'endDate': '11/10/2017', 'Budget': 301919 },
-	{ 'id': 10, 'name': 'Realbridge', 'startDate': '3/5/2018', 'endDate': '10/2/2017', 'Budget': 505602 }
+	{ 'id': 10, 'name': 'Realbridge', 'startDate': '3/5/2018', 'endDate': '10/2/2017', 'Budget': 505602 },
+	{ 'id': 11, 'name': 'John', 'startDate': '9/19/2017', 'endDate': '3/9/2018', 'Budget': 88377 },
+	{ 'id': 12, 'name': 'Marco', 'startDate': '11/21/2017', 'endDate': '2/21/2018', 'Budget': 608715 },
+	{ 'id': 13, 'name': 'Fabio', 'startDate': '11/1/2017', 'endDate': '6/20/2017', 'Budget': 239507 },
+	{ 'id': 14, 'name': 'Dyno', 'startDate': '8/25/2017', 'endDate': '11/30/2017', 'Budget': 179838 },
+	{ 'id': 15, 'name': 'Loyola', 'startDate': '11/28/2017', 'endDate': '3/10/2018', 'Budget': 837850 },
+	{ 'id': 16, 'name': 'Rigatoni', 'startDate': '7/25/2017', 'endDate': '6/23/2017', 'Budget': 858131 },
+	{ 'id': 17, 'name': 'Gian', 'startDate': '6/27/2017', 'endDate': '1/15/2018', 'Budget': 109078 },
+	{ 'id': 18, 'name': 'Sean', 'startDate': '10/13/2017', 'endDate': '1/25/2018', 'Budget': 272552 },
+	{ 'id': 19, 'name': 'Realo', 'startDate': '9/6/2017', 'endDate': '11/10/2017', 'Budget': 301919 },
+	{ 'id': 20, 'name': 'William', 'startDate': '3/5/2018', 'endDate': '10/2/2017', 'Budget': 505602 }
 ]
