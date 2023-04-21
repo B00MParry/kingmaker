@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useRecoilState } from 'recoil';
 import { CampaignType, campaignsState } from '../store/campaigns';
 import Table from '../components/Table';
@@ -11,8 +11,7 @@ declare global {
 }
 
 export const Home = () => {
-    const [test, setTest] = useState(false)
-    const [campaigns, setCampaigns] = useRecoilState(campaignsState);
+    const [, setCampaigns] = useRecoilState(campaignsState);
 
     useEffect(() => {
         const addCampaigns = (campaigns: CampaignType[]) => {
@@ -37,7 +36,7 @@ export const Home = () => {
 
         window.addCampaigns = addCampaigns
     }, [])
-    
+
     return (
         <div>
             <Table />

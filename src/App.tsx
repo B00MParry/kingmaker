@@ -1,4 +1,3 @@
-import './App.css'
 import { RecoilRoot } from 'recoil'
 import { Home } from './pages/Home'
 
