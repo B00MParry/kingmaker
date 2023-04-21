@@ -29,7 +29,7 @@ export const Home = () => {
                 throw new Error('Please provide at least one valid campaign!')
             }
 
-            setCampaigns(oldCampaigns => mergeCampaigns([...oldCampaigns], [...validatedCampaigns]))
+            setCampaigns(oldCampaigns => mergeCampaigns(oldCampaigns, validatedCampaigns))
 
             console.info('Successfully added / updated campaigns!')
         }
