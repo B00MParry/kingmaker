@@ -1,6 +1,5 @@
 import { useRecoilState, useRecoilValue } from "recoil"
 import { campaignsFilterValue, campaignsState } from "../store/campaigns"
-import { useEffect } from "react";
 
 type Props = {}
 

@@ -31,3 +31,33 @@ export const isACampaign = (obj: any): obj is CampaignType => {
 
 	return validation
 }
+
+export function mergeCampaigns(array1: CampaignType[], array2: CampaignType[]): CampaignType[] {
+	const idMap = new Map<number, CampaignType>();
+  
+	// First, add all the objects from the first array to the map
+	for (const obj of array1) {
+	  idMap.set(obj.id, obj);
+	}
+  
+	// Then, iterate over the objects from the second array
+	for (const obj of array2) {
+	  if (idMap.has(obj.id)) {
+		// If an object with the same id already exists in the map,
+		// create a new object with the updated properties
+		const existingObj = idMap.get(obj.id)!;
+		const updatedObj = { ...existingObj, ...obj };
+		idMap.set(obj.id, updatedObj);
+	  } else {
+		// If the object doesn't exist in the map yet, add it
+		idMap.set(obj.id, obj);
+	  }
+	}
+  
+	// Finally, convert the map to an array of objects and return it
+	return Array.from(idMap.values());
+  }
+  
+  
+  
+  

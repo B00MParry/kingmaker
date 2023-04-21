@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useRecoilState } from 'recoil';
 import { CampaignType, campaignsState } from '../store/campaigns';
 import Table from '../components/Table';
-import { isACampaign } from '../lib/utils';
+import { isACampaign, mergeCampaigns } from '../lib/utils';
 
 declare global {
     interface Window {
@@ -23,15 +23,15 @@ export const Home = () => {
                 throw new Error('Please provide at least one campaign!')
             }
 
-            const cleanedCampaigns = campaigns.filter((campaign) => isACampaign(campaign))
+            const validatedCampaigns = campaigns.filter((campaign) => isACampaign(campaign))
 
-            if (!cleanedCampaigns.length) {
+            if (!validatedCampaigns.length) {
                 throw new Error('Please provide at least one valid campaign!')
             }
 
-            setCampaigns((oldCampaigns) => [...oldCampaigns, ...cleanedCampaigns])
+            setCampaigns(oldCampaigns => mergeCampaigns([...oldCampaigns], [...validatedCampaigns]))
 
-            console.log('Added campaigns', cleanedCampaigns)
+            console.info('Successfully added / updated campaigns!')
         }
 
         window.addCampaigns = addCampaigns
