@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useRecoilState } from 'recoil';
 import { CampaignType, campaignsState } from '../store/campaigns';
 import { Table } from '../components/Table';
-import { isACampaign, mergeCampaigns } from '../lib/utils';
+import { convertToDDMMYYYY, isACampaign, mergeCampaigns } from '../lib/utils';
 import Pagination from '../components/Pagination';
 import { Filters } from '../components/Filters';
 
@@ -25,7 +25,12 @@ export const Home = () => {
                 throw new Error('Please provide at least one campaign!')
             }
 
-            const validatedCampaigns = campaigns.filter((campaign) => isACampaign(campaign))
+            const validatedCampaigns = campaigns.filter((campaign) => isACampaign(campaign)).map((campaign => {
+                campaign.startDate = convertToDDMMYYYY(campaign.startDate)
+                campaign.endDate = convertToDDMMYYYY(campaign.endDate)
+
+                return campaign;
+            }))
 
             if (!validatedCampaigns.length) {
                 throw new Error('Please provide at least one valid campaign!')
@@ -38,7 +43,7 @@ export const Home = () => {
                 }
             })
 
-            console.info('Successfully added / updated campaigns!')
+            console.info(`Successfully added or updated ${validatedCampaigns.length} campaign${validatedCampaigns.length > 1 ? 's' : ''}!`)
         }
 
         window.addCampaigns = addCampaigns

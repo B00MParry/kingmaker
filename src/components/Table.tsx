@@ -1,9 +1,8 @@
-import { useRecoilState, useRecoilValue } from "recoil"
-import { filteredCampaigns, setFilter } from "../store/campaigns"
+import { useRecoilValue } from "recoil"
+import { filteredCampaigns } from "../store/campaigns"
 import { TableHeaderCell, TableRowCell } from "./TableCell";
 
 export const Table = () => {
-    const [search, setSearch] = useRecoilState(setFilter);
     const filter = useRecoilValue(filteredCampaigns);
 
     return (

@@ -1,6 +1,5 @@
 import { useRecoilState, useRecoilValue } from "recoil"
-import { filteredCampaigns, filteredCampaignsCount, setFilter, setPagination } from "../store/campaigns"
-import { useState } from "react";
+import { filteredCampaignsCount, setPagination } from "../store/campaigns"
 
 export default function Pagination() {
     const [pagination, updatePagination] = useRecoilState(setPagination);
@@ -22,7 +21,6 @@ export default function Pagination() {
     return (
         <div className="flex justify-between">
             <select onChange={(e) => updatePagination({ page: 1, limit: Number(e.currentTarget.value) })} className="max-w-[100px] cursor-pointer border text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block px-2 py-1">
-                <option value={3}>3</option>
                 <option value={10}>10</option>
                 <option value={25}>25</option>
                 <option value={50}>50</option>

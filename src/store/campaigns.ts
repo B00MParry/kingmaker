@@ -1,6 +1,7 @@
 import { atom, selector } from 'recoil'
 import data from '../lib/data'
 import { DefaultValue } from 'recoil'
+import { allExpressionsTrue } from '../lib/utils';
 
 export type CampaignType = {
 	id: number;
@@ -35,7 +36,7 @@ export const campaignsState = atom<CampaignStore>({
 	key: 'campaignsState',
 	default: {
 		campaigns: data,
-		pagination: { page: 1, limit: 3 },
+		pagination: { page: 1, limit: 10 },
 		filter: {
 			search: '', dates: {
 				startDate: '',
@@ -50,10 +51,32 @@ export const filteredCampaigns = selector({
 	get: ({ get }) => {
 		const { campaigns, filter, pagination } = get(campaignsState)
 		const { page, limit } = pagination
-		const filteredItems = campaigns.filter((campaign) =>
-			campaign.name.toLowerCase().includes(filter.search.toLowerCase())
-		)
+		const filteredItems = campaigns.filter((campaign) => {
+			const campaignIncludesSearch = campaign.name.toLowerCase().includes(filter.search.toLowerCase())
+
+			if (!filter.dates.startDate && !filter.dates.endDate) {
+				return campaignIncludesSearch
+			}
+
+			let filterRequirements = [campaignIncludesSearch]
+
+			const campaignStartDate = new Date(campaign.startDate)
+			const campaignEndDate = new Date(campaign.endDate)
+			const selectedStartDate = filter.dates.startDate ? new Date(filter.dates.startDate) : null
+			const selectedEndDate = filter.dates.endDate ? new Date(filter.dates.endDate) : null
+
+			if (selectedStartDate && !selectedEndDate) {
+				filterRequirements.push(campaignStartDate >= selectedStartDate || campaignEndDate >= selectedStartDate)
+			}
+
+			if (!selectedStartDate && selectedEndDate) {
+				filterRequirements.push(campaignStartDate <= selectedEndDate || campaignEndDate <= selectedEndDate)
+			}
+			
+			return allExpressionsTrue(filterRequirements)
+		})
 		const paginatedItems = filteredItems.slice((page - 1) * limit, page * limit)
+
 		return paginatedItems
 	}
 })
@@ -82,5 +105,13 @@ export const setPagination = selector({
 	get: ({ get }) => get(campaignsState).pagination,
 	set: ({ set }, newPagination) => {
 		set(campaignsState, newPagination instanceof DefaultValue ? newPagination : (old) => ({ ...old, pagination: newPagination }))
+	},
+})
+
+export const setDates = selector({
+	key: 'setDates',
+	get: ({ get }) => get(campaignsState).filter.dates,
+	set: ({ set }, newDates) => {
+		set(campaignsState, newDates instanceof DefaultValue ? newDates : (old) => ({ ...old, filter: { ...old.filter, dates: newDates } }))
 	},
 })

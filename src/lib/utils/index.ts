@@ -23,10 +23,15 @@ export const isACampaign = (obj: any): obj is CampaignType => {
 		typeof obj.startDate === 'string',
 		typeof obj.endDate === 'string',
 		typeof obj.Budget === 'number',
+		new Date(obj.startDate) < new Date(obj.endDate)
 	])
 
 	if (!validation) {
-		console.warn('Inputted campaign is in the wrong format.', obj)
+		if (!(new Date(obj.startDate) < new Date(obj.endDate))) {
+			console.warn('Inputted campaign has an invalid date range.', obj)
+		} else {
+			console.warn('Inputted campaign is in the wrong format.', obj)
+		}
 	}
 
 	return validation
@@ -56,4 +61,10 @@ export function mergeCampaigns(array1: CampaignType[], array2: CampaignType[]): 
 
 	// Finally, convert the map to an array of objects and return it
 	return Array.from(idMap.values())
+}
+
+export const convertToDDMMYYYY = (date: string) => {
+    const splitDate = date.split('/');
+    
+    return `${splitDate[1]}/${splitDate[0]}/${splitDate[2]}`
 }
