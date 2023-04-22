@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
 import { useRecoilState } from 'recoil';
 import { CampaignType, campaignsState } from '../store/campaigns';
-import Table from '../components/Table';
+import { Table } from '../components/Table';
 import { isACampaign, mergeCampaigns } from '../lib/utils';
+import Pagination from '../components/Pagination';
+import { Filters } from '../components/Filters';
 
 declare global {
     interface Window {
@@ -29,7 +31,12 @@ export const Home = () => {
                 throw new Error('Please provide at least one valid campaign!')
             }
 
-            setCampaigns(oldCampaigns => mergeCampaigns(oldCampaigns, validatedCampaigns))
+            setCampaigns(campaignState => {
+                return {
+                    ...campaignState,
+                    campaigns: mergeCampaigns(campaignState.campaigns, validatedCampaigns)
+                }
+            })
 
             console.info('Successfully added / updated campaigns!')
         }
@@ -39,7 +46,12 @@ export const Home = () => {
 
     return (
         <div>
+            <h1 className="px-6 py-4 inline-block min-w-full text-xl">
+                Campaigns
+            </h1>
+            <Filters />
             <Table />
+            <Pagination />
         </div>
     )
 }
