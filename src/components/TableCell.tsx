@@ -18,8 +18,8 @@ export const TableHeaderCell = ({ header }: TableHeaderCellProps) => (
 )
 
 export const TableRowCell = ({ id, name, startDate, endDate, Budget, bgGray }: TableRowCellProps) => {
-    // Start date is before today and end date is after today
-    const active = new Date(startDate) <= new Date() && new Date(endDate) >= new Date()
+    // Start date is before today or end date is after today
+    const active = new Date(startDate) <= new Date() || new Date(endDate) >= new Date()
 
     return (
         <tr key={id} className={`${bgGray ? 'bg-gray-100' : 'bg-white'} border-b`}>

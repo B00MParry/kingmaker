@@ -1,7 +1,7 @@
 import { atom, selector } from 'recoil'
 import data from '../lib/data'
 import { DefaultValue } from 'recoil'
-import { allExpressionsTrue } from '../lib/utils';
+import { allExpressionsTrue, unFormatInputDate } from '../lib/utils'
 
 export type CampaignType = {
 	id: number;
@@ -58,18 +58,18 @@ export const filteredCampaigns = selector({
 				return campaignIncludesSearch
 			}
 
-			let filterRequirements = [campaignIncludesSearch]
+			const filterRequirements = [campaignIncludesSearch]
 
-			const campaignStartDate = new Date(campaign.startDate)
-			const campaignEndDate = new Date(campaign.endDate)
-			const selectedStartDate = filter.dates.startDate ? new Date(filter.dates.startDate) : null
-			const selectedEndDate = filter.dates.endDate ? new Date(filter.dates.endDate) : null
+			const campaignStartDate = new Date(unFormatInputDate(campaign.startDate))
+			const campaignEndDate = new Date(unFormatInputDate(campaign.endDate))
+			const selectedStartDate = filter.dates.startDate ? new Date(unFormatInputDate(filter.dates.startDate)) : null
+			const selectedEndDate = filter.dates.endDate ? new Date(unFormatInputDate(filter.dates.endDate)) : null
 
-			if (selectedStartDate && !selectedEndDate) {
+			if (selectedStartDate) {
 				filterRequirements.push(campaignStartDate >= selectedStartDate || campaignEndDate >= selectedStartDate)
 			}
 
-			if (!selectedStartDate && selectedEndDate) {
+			if (selectedEndDate) {
 				filterRequirements.push(campaignStartDate <= selectedEndDate || campaignEndDate <= selectedEndDate)
 			}
 			

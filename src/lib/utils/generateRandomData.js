@@ -1,34 +1,43 @@
-// Only using this for testing purposes
-
-function generateRandomString(length) {
-  let result = '';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return result;
-}
-
-function generateRandomBudget() {
-  return Math.floor(Math.random() * 100000);
-}
-
-function generateRandomDate(startDate = new Date(2016, 0, 1)) {
-  const start = startDate;
-  const end = new Date(2030, 3, 22);
-  const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-}
-
 function generateData(n) {
-  const data = [];
-  for (let i = 0; i < n; i++) {
-    const id = i + 1;
-    const name = generateRandomString(6);
-    const startDate = generateRandomDate(new Date('2016-01-01'));
-    const endDate = generateRandomDate(new Date(startDate));
-    const Budget = generateRandomBudget();
-    data.push({ id, name, startDate, endDate, Budget });
-  }
-  return data;
+	const data = []
+
+	for (let i = 0; i < n; i++) {
+		const id = i + 1
+		const name = generateName()
+		const startDate = generateDate()
+		const endDate = generateDate()
+		const Budget = Math.floor(Math.random() * 100000)
+
+		const object = { id, name, startDate, endDate, Budget }
+		data.push(object)
+	}
+
+	return data
+}
+
+function generateName() {
+	const vowels = 'aeiou'
+	const consonants = 'bcdfghjklmnpqrstvwxyz'
+	const nameLength = Math.floor(Math.random() * 7) + 4
+	let name = ''
+
+	for (let i = 0; i < nameLength; i++) {
+		if (i % 2 === 0) {
+			const index = Math.floor(Math.random() * consonants.length)
+			name += consonants[index]
+		} else {
+			const index = Math.floor(Math.random() * vowels.length)
+			name += vowels[index]
+		}
+	}
+
+	return name.charAt(0).toUpperCase() + name.slice(1)
+}
+
+function generateDate() {
+	const day = Math.floor(Math.random() * 28) + 1
+	const month = Math.floor(Math.random() * 12) + 1
+	const year = Math.floor(Math.random() * 7) + 2020
+
+	return `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`
 }

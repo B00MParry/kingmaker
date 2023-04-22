@@ -63,8 +63,12 @@ export function mergeCampaigns(array1: CampaignType[], array2: CampaignType[]): 
 	return Array.from(idMap.values())
 }
 
+export const formatInputDate = (date: string) => date.split('-').reverse().join('/')
+
+export const unFormatInputDate = (date: string) => date.split('/').reverse().join('-')
+
 export const convertToDDMMYYYY = (date: string) => {
-    const splitDate = date.split('/');
+	const splitDate = date.split('/')
     
-    return `${splitDate[1]}/${splitDate[0]}/${splitDate[2]}`
+	return `${splitDate[1]}/${splitDate[0]}/${splitDate[2]}`
 }
