@@ -57,6 +57,3 @@ export function mergeCampaigns(array1: CampaignType[], array2: CampaignType[]): 
 	// Finally, convert the map to an array of objects and return it
 	return Array.from(idMap.values())
 }
-
-
-

@@ -15,8 +15,14 @@ type PaginationType = {
 	page: number;
 }
 
+type DatesType = {
+	startDate: string;
+	endDate: string;
+}
+
 type FilterType = {
 	search: string;
+	dates: DatesType;
 }
 
 type CampaignStore = {
@@ -30,7 +36,12 @@ export const campaignsState = atom<CampaignStore>({
 	default: {
 		campaigns: data,
 		pagination: { page: 1, limit: 3 },
-		filter: { search: '' },
+		filter: {
+			search: '', dates: {
+				startDate: '',
+				endDate: '',
+			}
+		},
 	},
 })
 
@@ -62,7 +73,7 @@ export const setFilter = selector({
 	key: 'setFilter',
 	get: ({ get }) => get(campaignsState).filter.search,
 	set: ({ set }, newFilter) => {
-		set(campaignsState, newFilter instanceof DefaultValue ? newFilter : (old) => ({ ...old, filter: { search: newFilter } }))
+		set(campaignsState, newFilter instanceof DefaultValue ? newFilter : (old) => ({ ...old, filter: { ...old.filter, search: newFilter } }))
 	},
 })
 
