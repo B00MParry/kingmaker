@@ -19,13 +19,16 @@ export default function Pagination() {
     }
 
     return (
-        <div className="flex justify-between">
-            <select onChange={(e) => updatePagination({ page: 1, limit: Number(e.currentTarget.value) })} className="max-w-[100px] cursor-pointer border text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block px-2 py-1">
-                <option value={10}>10</option>
-                <option value={25}>25</option>
-                <option value={50}>50</option>
-                <option value={100}>100</option>
-            </select>
+        <div className="flex justify-between px-6 pt-2 pb-6">
+            <div className="flex items-center">
+                <select onChange={(e) => updatePagination({ page: 1, limit: Number(e.currentTarget.value) })} className="max-w-[100px] cursor-pointer outline-none border-b text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block px-2 py-1">
+                    <option value={10}>10</option>
+                    <option value={25}>25</option>
+                    <option value={50}>50</option>
+                    <option value={100}>100</option>
+                </select>
+                <span className="text-xs font-medium uppercase tracking-wide text-gray-900 ml-4">Rows per page</span>
+            </div>
 
             <div className="flex items-center justify-end">
                 <div className="flex justify-center items-center space-x-4">

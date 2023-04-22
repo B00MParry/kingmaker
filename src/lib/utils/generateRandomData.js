@@ -5,8 +5,13 @@ function generateData(n) {
 		const id = i + 1
 		const name = generateName()
 		const startDate = generateDate()
-		const endDate = generateDate()
+		let endDate = generateDate()
 		const Budget = Math.floor(Math.random() * 100000)
+
+		// Ensure endDate is after startDate
+		while (new Date(endDate) <= new Date(startDate)) {
+			endDate = generateDate()
+		}
 
 		const object = { id, name, startDate, endDate, Budget }
 		data.push(object)
