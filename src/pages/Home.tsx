@@ -51,9 +51,6 @@ export const Home = () => {
 
     return (
         <div>
-            <h1 className="px-6 py-4 inline-block min-w-full text-xl">
-                Campaigns
-            </h1>
             <Filters />
             <Table />
             <Pagination />

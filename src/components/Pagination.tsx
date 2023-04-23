@@ -19,7 +19,7 @@ export default function Pagination() {
     }
 
     return (
-        <div className="flex justify-between px-6 pt-2 pb-6">
+        <div className="flex justify-between items-center px-6 pt-2 pb-6">
             <div className="flex items-center">
                 <select onChange={(e) => updatePagination({ page: 1, limit: Number(e.currentTarget.value) })} className="max-w-[100px] cursor-pointer outline-none border-b text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block px-2 py-1">
                     <option value={10}>10</option>
@@ -32,7 +32,7 @@ export default function Pagination() {
 
             <div className="flex items-center justify-end">
                 <div className="flex justify-center items-center space-x-4">
-                    <div onClick={prevPage} className="flex align-items border bg-gray-100 px-2 py-1 text-3xl leading-6 text-slate-400 transition hover:bg-gray-200 hover:text-slate-500 cursor-pointer shadow-sm">
+                    <div onClick={prevPage} className="flex align-items px-2 py-1 text-3xl leading-6 text-slate-400 transition hover:text-slate-500 cursor-pointer shadow-sm">
                         <svg
                             className="w-4 h-4 text-gray-400 inline"
                             viewBox="0 0 1024 1024"
@@ -46,7 +46,7 @@ export default function Pagination() {
                         </svg>
                     </div>
                     <div className="text-slate-500">{pagination.page} / {lastPage}</div>
-                    <div onClick={nextPage} className="flex align-items border bg-gray-100 px-2 py-1 text-3xl leading-6 text-slate-400 transition hover:bg-gray-200 hover:text-slate-500 cursor-pointer shadow-sm">
+                    <div onClick={nextPage} className="flex align-items px-2 py-1 text-3xl leading-6 text-slate-400 transition hover:text-slate-500 cursor-pointer shadow-sm">
                         <svg
                             className="w-4 h-4 text-gray-400 inline"
                             viewBox="0 0 1024 1024"
