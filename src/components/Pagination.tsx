@@ -19,7 +19,7 @@ export default function Pagination() {
     }
 
     return (
-        <div className="flex justify-between items-center px-6 pt-2 pb-6 flex-col-reverse sm:flex-row">
+        <div className="flex flex-col-reverse items-center justify-between px-6 pt-2 pb-6 sm:flex-row">
             <div className="flex items-center mt-1 sm:mt-0">
                 <select onChange={(e) => updatePagination({ page: 1, limit: Number(e.currentTarget.value) })} className="max-w-[100px] cursor-pointer outline-none border-b text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block px-2 py-1">
                     <option value={10}>10</option>
@@ -27,14 +27,14 @@ export default function Pagination() {
                     <option value={50}>50</option>
                     <option value={100}>100</option>
                 </select>
-                <span className="text-xs font-medium uppercase tracking-wide text-gray-900 ml-4">Rows per page</span>
+                <span className="ml-4 text-xs font-medium tracking-wide text-gray-900 uppercase">Rows per page</span>
             </div>
 
             <div className="flex items-center justify-end mt-2 sm:mt-0">
-                <div className="flex justify-center items-center space-x-4">
-                    <div onClick={prevPage} className="flex align-items px-2 py-1 text-3xl leading-6 text-slate-400 transition hover:text-slate-500 cursor-pointer shadow-sm">
+                <div className="flex items-center justify-center space-x-4">
+                    <div onClick={prevPage} className="flex px-2 py-1 text-3xl leading-6 transition shadow-sm cursor-pointer align-items text-slate-400 hover:text-slate-500">
                         <svg
-                            className="w-4 h-4 text-gray-400 inline"
+                            className="inline w-4 h-4 text-gray-400"
                             viewBox="0 0 1024 1024"
                         >
                             <path
@@ -46,9 +46,9 @@ export default function Pagination() {
                         </svg>
                     </div>
                     <div className="text-slate-500">{pagination.page} / {lastPage}</div>
-                    <div onClick={nextPage} className="flex align-items px-2 py-1 text-3xl leading-6 text-slate-400 transition hover:text-slate-500 cursor-pointer shadow-sm">
+                    <div onClick={nextPage} className="flex px-2 py-1 text-3xl leading-6 transition shadow-sm cursor-pointer align-items text-slate-400 hover:text-slate-500">
                         <svg
-                            className="w-4 h-4 text-gray-400 inline"
+                            className="inline w-4 h-4 text-gray-400"
                             viewBox="0 0 1024 1024"
                         >
                             <path

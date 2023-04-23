@@ -19,13 +19,13 @@ export const Filters = () => {
 
     return (
         <div className="px-6">
-            <div className="sm:flex sm:justify-between sm:items-center py-4">
-                <h1 className="text-2xl mr-2 sm:mr-0">
+            <div className="py-4 sm:flex sm:justify-between sm:items-center">
+                <h1 className="mr-2 text-2xl sm:mr-0">
                     Campaigns
                 </h1>
                 <div className="relative">
                     <svg
-                        className="h-4 w-4 fill-gray-400 absolute top-1/2 left-2 -translate-y-1/2"
+                        className="absolute w-4 h-4 -translate-y-1/2 fill-gray-400 top-1/2 left-2"
                         viewBox="0 0 24 24"
                     >
                         <path
@@ -37,7 +37,7 @@ export const Filters = () => {
                     <input type="search" value={search} onChange={handleSearch} className="max-w-[200px] w-full border-b outline-none text-gray-900 placeholder:text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 placeholder:text-xs placeholder:font-medium placeholder:uppercase placeholder:tracking-wide block px-2 py-1 pl-8" placeholder="Search by name"></input>
                 </div>
             </div>
-            <h2 className="text-md mb-2">Filter by period</h2>
+            <h2 className="mb-2 text-md">Filter by period</h2>
             <div className="flex items-center mb-[5px]">
                 <span className="text-xs w-[65px] block font-medium uppercase tracking-wide text-gray-900">Start</span>
                 <input onChange={(e) => handleDates(e, 'startDate')} max={dates.endDate && unFormatInputDate(dates.endDate)} type="date" className="max-w-[200px] w-full border-b outline-none text-gray-900 mr-4 text-sm focus:ring-blue-500 focus:border-blue-500 text-xs font-medium uppercase tracking-wide block px-2 py-1" />
