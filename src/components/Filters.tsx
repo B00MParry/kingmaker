@@ -19,8 +19,8 @@ export const Filters = () => {
 
     return (
         <div className="px-6">
-            <div className="flex py-4 justify-between">
-                <h1 className="text-2xl">
+            <div className="sm:flex sm:justify-between sm:items-center py-4">
+                <h1 className="text-2xl mr-2 sm:mr-0">
                     Campaigns
                 </h1>
                 <div className="relative">
