@@ -3,7 +3,7 @@ import { filteredCampaigns } from "../store/campaigns"
 import { TableHeaderCell, TableRowCell } from "./TableCell";
 
 export const Table = () => {
-    const filter = useRecoilValue(filteredCampaigns);
+    const filter = useRecoilValue(filteredCampaigns).filteredCampaigns;
 
     return (
         <div className="flex flex-col">

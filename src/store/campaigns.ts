@@ -1,7 +1,7 @@
 import { atom, selector } from 'recoil'
 import data from '../lib/data'
 import { DefaultValue } from 'recoil'
-import { allExpressionsTrue, unFormatInputDate } from '../lib/utils'
+import { allExpressionsTrue, isDateInRange, unFormatInputDate } from '../lib/utils'
 
 export type CampaignType = {
 	id: number;
@@ -26,11 +26,11 @@ type FilterType = {
 	dates: DatesType;
 }
 
-type CampaignStore = {
+export type CampaignStore = {
 	campaigns: CampaignType[];
 	pagination: PaginationType;
 	filter: FilterType;
-}
+};
 
 export const campaignsState = atom<CampaignStore>({
 	key: 'campaignsState',
@@ -65,30 +65,36 @@ export const filteredCampaigns = selector({
 			const selectedStartDate = filter.dates.startDate ? new Date(unFormatInputDate(filter.dates.startDate)) : null
 			const selectedEndDate = filter.dates.endDate ? new Date(unFormatInputDate(filter.dates.endDate)) : null
 
-			if (selectedStartDate) {
+			// if only start date is selected, we want to show campaigns that have any date after the selected start date
+			if (selectedStartDate && !selectedEndDate) {
 				filterRequirements.push(campaignStartDate >= selectedStartDate || campaignEndDate >= selectedStartDate)
 			}
 
-			if (selectedEndDate) {
+			// if only end date is selected, we want to show campaigns that have any date before the selected end date
+			if (selectedEndDate && !selectedStartDate) {
 				filterRequirements.push(campaignStartDate <= selectedEndDate || campaignEndDate <= selectedEndDate)
 			}
-			
+
+			// if both dates are selected, we want to show campaigns that have any date in range
+			if (selectedStartDate && selectedEndDate) {
+				filterRequirements.push(isDateInRange(campaignStartDate, selectedStartDate, selectedEndDate) || isDateInRange(campaignEndDate, selectedStartDate, selectedEndDate))
+			}
+
 			return allExpressionsTrue(filterRequirements)
 		})
 		const paginatedItems = filteredItems.slice((page - 1) * limit, page * limit)
 
-		return paginatedItems
+		return {
+			filteredCampaigns: paginatedItems,
+			filteredCampaignsCount: filteredItems.length,
+		}
 	}
 })
 
 export const filteredCampaignsCount = selector({
 	key: 'filteredCampaignsCount',
 	get: ({ get }) => {
-		const { campaigns, filter } = get(campaignsState)
-		const filteredItemsCount = campaigns.filter((campaign) =>
-			campaign.name.toLowerCase().includes(filter.search.toLowerCase())
-		).length
-		return filteredItemsCount
+		return get(filteredCampaigns).filteredCampaignsCount
 	}
 })
 

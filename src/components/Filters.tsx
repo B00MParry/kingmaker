@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil"
 import { setDates, setFilter, setPagination } from "../store/campaigns"
-import { formatInputDate } from "../lib/utils";
+import { formatInputDate, unFormatInputDate } from "../lib/utils";
 
 export const Filters = () => {
     const [search, setSearch] = useRecoilState(setFilter);
@@ -12,6 +12,11 @@ export const Filters = () => {
         updatePagination((pagination) => ({ ...pagination, page: 1 }));
     }
 
+    const handleDates = (e: React.ChangeEvent<HTMLInputElement>, date: 'endDate' | 'startDate') => {
+        updateDates({ ...dates, [date]: e.currentTarget.value ? formatInputDate(e.currentTarget.value) : '' });
+        updatePagination((pagination) => ({ ...pagination, page: 1 }));
+    }
+
     return (
         <div className="px-6">
             <div className="flex py-4 justify-between">
@@ -19,7 +24,6 @@ export const Filters = () => {
                     Campaigns
                 </h1>
                 <div className="relative">
-
                     <svg
                         className="h-4 w-4 fill-gray-400 absolute top-1/2 left-2 -translate-y-1/2"
                         viewBox="0 0 24 24"
@@ -33,10 +37,14 @@ export const Filters = () => {
                     <input type="search" value={search} onChange={handleSearch} className="max-w-[200px] w-full border-b outline-none text-gray-900 placeholder:text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 placeholder:text-xs placeholder:font-medium placeholder:uppercase placeholder:tracking-wide block px-2 py-1 pl-8" placeholder="Search by name"></input>
                 </div>
             </div>
-
-            <div className="flex">
-                <input onChange={(e) => updateDates({ ...dates, startDate: e.currentTarget.value ? formatInputDate(e.currentTarget.value) : '' })} placeholder="lol" max={dates.endDate && dates.endDate} type="date" className="max-w-[200px] w-full border-b outline-none text-gray-900 mr-4 focus:ring-blue-500 focus:border-blue-500 text-xs font-medium uppercase tracking-wide block px-2 py-1" />
-                <input onChange={(e) => updateDates({ ...dates, endDate: e.currentTarget.value ? formatInputDate(e.currentTarget.value) : '' })} min={dates.startDate && dates.startDate} type="date" className="max-w-[200px] w-full border-b outline-none text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 text-xs font-medium uppercase tracking-wide block px-2 py-1" />
+            <h2 className="text-md mb-2">Filter by period</h2>
+            <div className="flex items-center mb-[5px]">
+                <span className="text-xs w-[65px] block font-medium uppercase tracking-wide text-gray-900">Start</span>
+                <input onChange={(e) => handleDates(e, 'startDate')} max={dates.endDate && unFormatInputDate(dates.endDate)} type="date" className="max-w-[200px] w-full border-b outline-none text-gray-900 mr-4 text-sm focus:ring-blue-500 focus:border-blue-500 text-xs font-medium uppercase tracking-wide block px-2 py-1" />
+            </div>
+            <div className="flex items-center">
+                <span className="text-xs w-[65px] block font-medium uppercase tracking-wide text-gray-900">End</span>
+                <input onChange={(e) => handleDates(e, 'endDate')} min={dates.startDate && unFormatInputDate(dates.startDate)} type="date" className="max-w-[200px] w-full border-b outline-none text-gray-900 focus:ring-blue-500 focus:border-blue-500 text-xs font-medium uppercase tracking-wide block px-2 py-1" />
             </div>
         </div>
     )
