@@ -33,7 +33,7 @@ export const isACampaign = (obj: any): obj is CampaignType => {
 		typeof obj.startDate === 'string',
 		typeof obj.endDate === 'string',
 		typeof obj.Budget === 'number',
-		new Date(obj.startDate) < new Date(obj.endDate)
+		new Date(obj.startDate) <= new Date(obj.endDate)
 	])
 
 	if (!validation) {
