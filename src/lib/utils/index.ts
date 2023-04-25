@@ -1,9 +1,19 @@
 import type { CampaignType } from '../../store/campaigns'
 
+/**
+ * Checks if all the expressions in an array are true
+ * @param {boolean[]} expressions An array of boolean expressions
+ * @returns A boolean indicating if all the expressions are true
+ */
 export const allExpressionsTrue = (expressions: boolean[]) => {
 	return expressions.every(expression => expression === true)
 }
 
+/**
+ * Checks if an object is a campaign
+ * @param {any} obj Takes any object and checks if it is a campaign 
+ * @returns {boolean} Returns a boolean indicating if the object is a campaign
+ */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const isACampaign = (obj: any): obj is CampaignType => {
 	if (typeof obj !== 'object' || obj === null) {
@@ -37,6 +47,12 @@ export const isACampaign = (obj: any): obj is CampaignType => {
 	return validation
 }
 
+/**
+ * Merges two arrays containing campaign objects
+ * @param {CampaignType[]} array1 First array to be merged
+ * @param {CampaignType[]} array2 Second array to be merged
+ * @returns {{CampaignType[]}}
+ */
 export function mergeCampaigns(array1: CampaignType[], array2: CampaignType[]): CampaignType[] {
 	const idMap = new Map<number, CampaignType>()
 
@@ -63,14 +79,36 @@ export function mergeCampaigns(array1: CampaignType[], array2: CampaignType[]): 
 	return Array.from(idMap.values())
 }
 
+/**
+ * Checks if a date is in a given range
+ * @param {Date} date Date to be checked
+ * @param {Date} startDate Start date of the range
+ * @param {Date} endDate End date of the range
+ * @returns {boolean} Returns a boolean indicating if the date is in the range
+ */
 export const isDateInRange = (date: Date, startDate: Date, endDate: Date): boolean => {
 	return date >= startDate && date <= endDate
 }
 
+/**
+ * Converts a date string from YYYY-MM-DD to DD/MM/YYYY
+ * @param {string} date String date to be formatted
+ * @returns {string} Returns a string with the date formatted
+ */
 export const formatInputDate = (date: string) => date.split('-').reverse().join('/')
 
+/**
+ * Converts a date string from DD/MM/YYYY to YYYY-MM-DD
+ * @param {string} date 
+ * @returns {string} Returns a string with the date formatted
+ */
 export const unFormatInputDate = (date: string) => date.split('/').reverse().join('-')
 
+/**
+ * Converts a date string from DD/MM/YYYY to MM/DD/YYYY
+ * @param {string} date 
+ * @returns {string} Returns a string with the date formatted
+ */
 export const convertToDDMMYYYY = (date: string) => {
 	const splitDate = date.split('/')
 

@@ -1,3 +1,9 @@
+/**
+ * This function generates random data for the table
+ * @param n number of rows to generate
+ * @returns an array of campaign objects
+ * @example In the console: generateData(10), copy the result and paste it in ./src/lib/data/index.ts
+ */
 function generateData(n) {
 	const names = [
 		'Alice',
