@@ -40,7 +40,7 @@ export const Filters = () => {
             <h2 className="mb-2 text-md">Filter by period</h2>
             <div className="flex items-center mb-[5px]">
                 <span className="text-xs w-[65px] block font-medium uppercase tracking-wide text-gray-900">Start</span>
-                <input onChange={(e) => handleDates(e, 'startDate')} max={dates.endDate && unFormatInputDate(dates.endDate)} type="date" className="max-w-[200px] w-full border-b outline-none text-gray-900 mr-4 text-sm focus:ring-blue-500 focus:border-blue-500 text-xs font-medium uppercase tracking-wide block px-2 py-1" />
+                <input onChange={(e) => handleDates(e, 'startDate')} max={dates.endDate && unFormatInputDate(dates.endDate)} type="date" className="max-w-[200px] w-full border-b outline-none text-gray-900 mr-4 focus:ring-blue-500 focus:border-blue-500 text-xs font-medium uppercase tracking-wide block px-2 py-1" />
             </div>
             <div className="flex items-center">
                 <span className="text-xs w-[65px] block font-medium uppercase tracking-wide text-gray-900">End</span>
