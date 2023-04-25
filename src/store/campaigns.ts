@@ -38,7 +38,8 @@ export const campaignsState = atom<CampaignStore>({
 		campaigns: data,
 		pagination: { page: 1, limit: 10 },
 		filter: {
-			search: '', dates: {
+			search: '',
+			dates: {
 				startDate: '',
 				endDate: '',
 			}
