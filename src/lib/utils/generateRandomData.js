@@ -4,6 +4,7 @@
  * @returns an array of campaign objects
  * @example In the console: generateData(10), copy the result and paste it in ./src/lib/data/index.ts
  */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 function generateData(n) {
 	const names = [
 		'Alice',

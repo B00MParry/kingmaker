@@ -14,8 +14,7 @@ export const allExpressionsTrue = (expressions: boolean[]) => {
  * @param {any} obj Takes any object and checks if it is a campaign 
  * @returns {boolean} Returns a boolean indicating if the object is a campaign
  */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export const isACampaign = (obj: any): obj is CampaignType => {
+export const isACampaign = (obj: CampaignType) => {
 	if (typeof obj !== 'object' || obj === null) {
 		console.warn('Inputted campaign is not an object', obj)
 

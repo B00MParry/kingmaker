@@ -1,10 +1,11 @@
+import React from 'react'
 import { useEffect } from 'react'
-import { useRecoilState } from 'recoil';
-import { CampaignType, campaignsState } from '../store/campaigns';
-import { Table } from '../components/Table';
-import { convertToDDMMYYYY, isACampaign, mergeCampaigns } from '../lib/utils';
-import Pagination from '../components/Pagination';
-import { Filters } from '../components/Filters';
+import { useRecoilState } from 'recoil'
+import { CampaignType, campaignsState } from '../store/campaigns'
+import { Table } from '../components/Table'
+import { convertToDDMMYYYY, isACampaign, mergeCampaigns } from '../lib/utils'
+import Pagination from '../components/Pagination'
+import { Filters } from '../components/Filters'
 
 declare global {
     interface Window {
@@ -13,47 +14,47 @@ declare global {
 }
 
 export const Home = () => {
-    const [, setCampaigns] = useRecoilState(campaignsState);
+	const [, setCampaigns] = useRecoilState(campaignsState)
 
-    useEffect(() => {
-        const addCampaigns = (campaigns: CampaignType[]) => {
-            if (!Array.isArray(campaigns)) {
-                throw new Error('Campaigns must be an array!')
-            }
+	useEffect(() => {
+		const addCampaigns = (campaigns: CampaignType[]) => {
+			if (!Array.isArray(campaigns)) {
+				throw new Error('Campaigns must be an array!')
+			}
 
-            if (!campaigns.length) {
-                throw new Error('Please provide at least one campaign!')
-            }
+			if (!campaigns.length) {
+				throw new Error('Please provide at least one campaign!')
+			}
 
-            const validatedCampaigns = campaigns.filter((campaign) => isACampaign(campaign)).map((campaign => {
-                campaign.startDate = convertToDDMMYYYY(campaign.startDate)
-                campaign.endDate = convertToDDMMYYYY(campaign.endDate)
+			const validatedCampaigns = campaigns.filter((campaign) => isACampaign(campaign)).map((campaign => {
+				campaign.startDate = convertToDDMMYYYY(campaign.startDate)
+				campaign.endDate = convertToDDMMYYYY(campaign.endDate)
 
-                return campaign;
-            }))
+				return campaign
+			}))
 
-            if (!validatedCampaigns.length) {
-                throw new Error('Please provide at least one valid campaign!')
-            }
+			if (!validatedCampaigns.length) {
+				throw new Error('Please provide at least one valid campaign!')
+			}
 
-            setCampaigns(campaignState => {
-                return {
-                    ...campaignState,
-                    campaigns: mergeCampaigns(campaignState.campaigns, validatedCampaigns)
-                }
-            })
+			setCampaigns(campaignState => {
+				return {
+					...campaignState,
+					campaigns: mergeCampaigns(campaignState.campaigns, validatedCampaigns)
+				}
+			})
 
-            console.info(`Successfully added or updated ${validatedCampaigns.length} campaign${validatedCampaigns.length > 1 ? 's' : ''}!`)
-        }
+			console.info(`Successfully added or updated ${validatedCampaigns.length} campaign${validatedCampaigns.length > 1 ? 's' : ''}!`)
+		}
 
-        window.addCampaigns = addCampaigns
-    }, [])
+		window.addCampaigns = addCampaigns
+	}, [])
 
-    return (
-        <div>
-            <Filters />
-            <Table />
-            <Pagination />
-        </div>
-    )
+	return (
+		<div>
+			<Filters />
+			<Table />
+			<Pagination />
+		</div>
+	)
 }

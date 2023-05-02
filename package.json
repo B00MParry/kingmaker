@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview --port 8080",
-    "lint": "eslint --ignore-path .eslintignore --ext .js,.ts . --fix"
+    "lint": "eslint --ignore-path .eslintignore --ext .js,.ts,.tsx . --fix"
   },
   "dependencies": {
     "react": "^18.2.0",
