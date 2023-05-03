@@ -9,7 +9,7 @@ type TableRowCellProps = CampaignType & {
     bgGray: boolean
 }
 
-// Separate components and make reusable (separation of concerns) + create a constants file with business logic / variables
+// Separate components and make reusable (separation of concerns) + create a constants file with business logic / variables!
 
 export const TableHeaderCell = ({ header }: TableHeaderCellProps) => (
 	<th
