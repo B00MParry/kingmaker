@@ -113,3 +113,13 @@ export const convertToDDMMYYYY = (date: string) => {
 
 	return `${splitDate[1]}/${splitDate[0]}/${splitDate[2]}`
 }
+
+/**
+ * Separates a number with commas
+ * @param {number} num 
+ * @returns {string} Returns the separated number as a string
+ * @example addCommaSeparationToNumber(1000000) // '1,000,000'
+ */
+export const addCommaSeparationToNumber = (num: number) => {
+	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}

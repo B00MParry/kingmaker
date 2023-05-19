@@ -2,6 +2,7 @@ import { atom, selector } from 'recoil'
 import data from '../lib/data'
 import { DefaultValue } from 'recoil'
 import { allExpressionsTrue, isDateInRange, unFormatInputDate } from '../lib/utils'
+import { ROWS_PER_PAGE } from '../lib/constants'
 
 export type CampaignType = {
 	id: number;
@@ -36,7 +37,7 @@ export const campaignsState = atom<CampaignStore>({
 	key: 'campaignsState',
 	default: {
 		campaigns: data,
-		pagination: { page: 1, limit: 10 },
+		pagination: { page: 1, limit: ROWS_PER_PAGE[0] },
 		filter: {
 			search: '',
 			dates: {

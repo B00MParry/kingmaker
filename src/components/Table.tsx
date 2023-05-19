@@ -1,7 +1,9 @@
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 import { filteredCampaigns } from '../store/campaigns'
-import { TableHeaderCell, TableRowCell } from './TableCell'
+import { TableRowCell } from './TableRowCell'
+import { TableHeaderCell } from './TableHeaderCell'
+import { TABLE_HEADERS } from '../lib/constants'
 
 export const Table = () => {
 	const filter = useRecoilValue(filteredCampaigns).filteredCampaigns
@@ -15,7 +17,7 @@ export const Table = () => {
 							<thead className="bg-white border-b">
 								<tr>
 									{
-										['Name', 'Status', 'Start date', 'End date', 'Budget'].map((header, index) => <TableHeaderCell key={index} header={header} />)
+										TABLE_HEADERS.map((header, index) => <TableHeaderCell key={index} header={header} />)
 									}
 								</tr>
 							</thead>
